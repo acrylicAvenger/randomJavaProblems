@@ -40,12 +40,35 @@ public class randomFunctions {
             System.out.println();
         }
     }
+    void stringReversal(StringBuilder str){
+        // use for loops to reverse regular strings
+        for(int i=0;i<str.length()/2;i++){
+            // we swap the first element with the last, second element with second last and so on
+            int front = i;
+            int back = str.length()-1-i;
+            char frontChar = str.charAt(front);
+            char backChar = str.charAt(back);
+            str.setCharAt(front,backChar);
+            str.setCharAt(back, frontChar);
+        }
+        System.out.println(str);
+    }
 
     public static void main(String[] args) {
         randomFunctions object = new randomFunctions();
+
+        StringBuilder sb = new StringBuilder("My name is Darshan");
+        StringBuilder newSB = new StringBuilder("Hello");
+
         object.printAverage(4,5,6);
         object.oddSum(37);
         object.gcd(12,128);
         object.fibonacci(15);
+
+        // string reverse
+        object.stringReversal(sb);
+        // or we can use the built in method
+        StringBuilder reverse = newSB.reverse();
+        System.out.println(reverse);
     }
 }
