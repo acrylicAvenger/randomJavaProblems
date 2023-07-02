@@ -1,3 +1,5 @@
+import java.awt.image.SinglePixelPackedSampleModel;
+
 public class recursionFunctions {
     void printSum(int i, int n, int sum){
         if(i==n){
@@ -73,6 +75,38 @@ public class recursionFunctions {
         towerOFHanoi(num-1, helper, source, destination);
     }
 
+    // find the first and the last occurrence of a character in a string
+    public  int firstOccurrence=-1, lastOccurrence=-1;
+    void firstAndLastOccurrence(String string, char character, int index){
+        // initialize index with 0
+        if(index==string.length()){
+            System.out.println("First and last occurrences are respectively: ");
+            System.out.println(firstOccurrence);
+            System.out.println(lastOccurrence);
+            return;
+        }
+        if(string.charAt(index)==character){
+            if(firstOccurrence==-1)
+                firstOccurrence = index;
+            else lastOccurrence = index;
+        }
+
+        firstAndLastOccurrence(string, character, index+1);
+    }
+
+    public String[] keypad = {".", "abc", "def", "ghi","jkl", "mno", "pqrs", "tu", "vwx", "yz"};
+    void printKeypadCombinations(String inputNumbers, int index, String combination){
+
+        if(index==inputNumbers.length()){
+            System.out.println(combination);
+            return;
+        }
+        String mappings = keypad[inputNumbers.charAt(index) - '0'];
+        for(int i=0; i<mappings.length();i++){
+            printKeypadCombinations(inputNumbers,index+1,combination+mappings.charAt(i));
+        }
+    }
+
     public static void main(String[] args) {
         recursionFunctions object = new recursionFunctions();
         object.printSum(1,5,0);
@@ -80,7 +114,7 @@ public class recursionFunctions {
         object.towerOFHanoi(6,"1","3","2");
 
         // reverse string
-        String string = "abcdefgh";
+        String string = "aabcdeafgh";
         object.reverseString(string, string.length()-1);
 
         // fibonacci
@@ -95,6 +129,12 @@ public class recursionFunctions {
         int exponential = object.xRaisedToN(3,3);
         System.out.println(exponential);
 
+        // first and last occurrence of a character
+        int index = 0;
+        object.firstAndLastOccurrence(string,'a',0);
+
+        // keypad
+        object.printKeypadCombinations("23",0,"");
     }
 
 }
